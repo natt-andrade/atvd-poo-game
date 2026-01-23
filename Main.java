@@ -1,17 +1,16 @@
-import javax.swing.*;
+
 import java.awt.*;
 import java.util.*;
 import java.util.List;
+import javax.swing.*;
 
 class CartaCombatente extends JPanel {
-    private Combatente c;
-    private JProgressBar vida;
-    private boolean selecionada = false;
-    private Color base;
+
+    private final Combatente c;
+    private final JProgressBar vida;
 
     public CartaCombatente(Combatente c, Color base) {
         this.c = c;
-        this.base = base;
 
         setLayout(new BorderLayout());
         setPreferredSize(new Dimension(150, 180));
@@ -29,7 +28,9 @@ class CartaCombatente extends JPanel {
         add(vida, BorderLayout.SOUTH);
     }
 
-    public Combatente getCombatente() { return c; }
+    public Combatente getCombatente() {
+        return c;
+    }
 
     public void atualizar() {
         vida.setValue(c.getPv());
@@ -39,13 +40,14 @@ class CartaCombatente extends JPanel {
     }
 
     public void selecionar(boolean s) {
-        selecionada = s;
         setBorder(BorderFactory.createLineBorder(
                 s ? Color.YELLOW : Color.BLACK, 3));
     }
 }
 
 public class Main {
+
+    private int turno = 0;
 
     private CartaCombatente atacanteSelecionado;
     private CartaCombatente alvoSelecionado;
@@ -64,7 +66,7 @@ public class Main {
         jogador.setBackground(new Color(80, 0, 120));
         inimigo.setBackground(new Color(90, 0, 0));
 
-        List<CartaCombatente> cartasJogador = criarTime(
+        criarTime(
                 jogador,
                 new Color(120, 0, 180),
                 List.of(
@@ -74,8 +76,7 @@ public class Main {
                 ),
                 true
         );
-
-        List<CartaCombatente> cartasInimigo = criarTime(
+        criarTime(
                 inimigo,
                 new Color(140, 20, 20),
                 List.of(
@@ -86,11 +87,25 @@ public class Main {
                 false
         );
 
+        JLabel turnos = new JLabel("Turnos: " + String.valueOf(turno));
+        turnos.setBackground(Color.BLACK);
+        turnos.setForeground(Color.WHITE);
+        turnos.setBorder(BorderFactory.createEmptyBorder(0, 20, 0, 20));
+
         JButton atacar = new JButton("Atacar");
-	    atacar.setBackground(Color.BLACK);
-	    atacar.setForeground(Color.WHITE);
+        atacar.setBackground(Color.BLACK);
+        atacar.setForeground(Color.WHITE);
+
+        JPanel menu = new JPanel();
+        menu.setBackground(Color.BLACK);
+        menu.setForeground(Color.WHITE);
+        menu.setLayout(new BorderLayout());
+
         atacar.addActionListener(e -> {
             if (atacanteSelecionado != null && alvoSelecionado != null) {
+                turno++;
+                turnos.setText("Turnos: " + String.valueOf(turno));
+
                 Combatente a = atacanteSelecionado.getCombatente();
                 Combatente b = alvoSelecionado.getCombatente();
                 if (a.vivo() && b.vivo()) {
@@ -101,9 +116,12 @@ public class Main {
             }
         });
 
+        menu.add(turnos, BorderLayout.WEST);
+        menu.add(atacar, BorderLayout.CENTER);
+
         f.add(jogador, BorderLayout.SOUTH);
         f.add(inimigo, BorderLayout.NORTH);
-        f.add(atacar, BorderLayout.CENTER);
+        f.add(menu, BorderLayout.CENTER);
 
         f.setSize(800, 500);
         f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -123,17 +141,22 @@ public class Main {
             cartas.add(carta);
 
             carta.addMouseListener(new java.awt.event.MouseAdapter() {
+                @Override
                 public void mouseClicked(java.awt.event.MouseEvent e) {
-                    if (!c.vivo()) return;
+                    if (!c.vivo()) {
+                        return;
+                    }
 
                     if (jogador) {
-                        if (atacanteSelecionado != null)
+                        if (atacanteSelecionado != null) {
                             atacanteSelecionado.selecionar(false);
+                        }
                         atacanteSelecionado = carta;
                         carta.selecionar(true);
                     } else {
-                        if (alvoSelecionado != null)
+                        if (alvoSelecionado != null) {
                             alvoSelecionado.selecionar(false);
+                        }
                         alvoSelecionado = carta;
                         carta.selecionar(true);
                     }
