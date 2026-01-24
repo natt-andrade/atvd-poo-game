@@ -13,7 +13,7 @@ class CartaCombatente extends JPanel {
         this.c = c;
 
         setLayout(new BorderLayout());
-        setPreferredSize(new Dimension(150, 180));
+        setPreferredSize(new Dimension(200, 280)); // Increased card size
         setBackground(base);
         setBorder(BorderFactory.createLineBorder(Color.BLACK, 2));
 
@@ -24,7 +24,15 @@ class CartaCombatente extends JPanel {
         vida.setValue(c.getPv());
         vida.setStringPainted(true);
 
+        String imagePath = "assets/" + c.getClass().getSimpleName() + ".png";
+        ImageIcon icon = new ImageIcon(imagePath);
+        Image image = icon.getImage();
+        Image scaledImage = image.getScaledInstance(180, 240, java.awt.Image.SCALE_SMOOTH); // Increased image size
+        ImageIcon scaledIcon = new ImageIcon(scaledImage);
+        JLabel imageLabel = new JLabel(scaledIcon);
+
         add(nome, BorderLayout.NORTH);
+        add(imageLabel, BorderLayout.CENTER);
         add(vida, BorderLayout.SOUTH);
     }
 
@@ -123,7 +131,7 @@ public class Main {
         f.add(inimigo, BorderLayout.NORTH);
         f.add(menu, BorderLayout.CENTER);
 
-        f.setSize(800, 500);
+        f.setSize(1000, 700); // Increased main frame size
         f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         f.setVisible(true);
     }
