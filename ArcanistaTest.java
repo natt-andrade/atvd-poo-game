@@ -1,5 +1,4 @@
-public class ArcanistaTest {
-    import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
 public class ArcanistaTest {
@@ -26,5 +25,4 @@ public class ArcanistaTest {
 
         assertEquals(5, mago.getMana(), "O mago devia ter recuperado 5 de mana!");
     }
-}
 }

@@ -8,6 +8,7 @@ class CartaCombatente extends JPanel {
 
     private final Combatente c;
     private final JProgressBar vida;
+    private JProgressBar mana;
 
     public CartaCombatente(Combatente c, Color base) {
         this.c = c;
@@ -34,7 +35,21 @@ class CartaCombatente extends JPanel {
 
         add(nome, BorderLayout.NORTH);
         add(imageLabel, BorderLayout.CENTER);
-        add(vida, BorderLayout.SOUTH);
+        
+        JPanel barrasPanel = new JPanel();
+        barrasPanel.setLayout(new BoxLayout(barrasPanel, BoxLayout.Y_AXIS));
+        barrasPanel.add(vida);
+
+        if (c instanceof Arcanista) {
+            Arcanista arcanista = (Arcanista) c;
+            mana = new JProgressBar(0, arcanista.getManaMaxima());
+            mana.setForeground(Color.BLUE);
+            mana.setValue(arcanista.getMana());
+            mana.setStringPainted(true);
+            barrasPanel.add(mana);
+        }
+
+        add(barrasPanel, BorderLayout.SOUTH);
     }
 
     public Combatente getCombatente() {
@@ -51,6 +66,10 @@ class CartaCombatente extends JPanel {
         } else if(porcentagem <= 0.3) {
             vida.setForeground(new Color(150, 0, 0));
 
+        }
+        
+        if (c instanceof Arcanista) {
+            mana.setValue(((Arcanista) c).getMana());
         }
 
 

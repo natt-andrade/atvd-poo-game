@@ -40,7 +40,20 @@ public class Arcanista extends Combatente {
         return barra;
     }
 
-    public int getMana() {
-        return mana;
+        public int getMana() {
+
+            return mana;
+
+        }
+
+    
+
+        public int getManaMaxima() {
+
+            return manaMaxima;
+
+        }
+
     }
-}
+
+    
