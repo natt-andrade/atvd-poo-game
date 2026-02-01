@@ -26,8 +26,15 @@ mkdir -p bin
 javac -d bin -cp lib/junit-platform-console-standalone-1.10.2.jar *.java
 ```
 
-
 Ele vai criar uma pasta bin e colocar todas as classes compiladas (.class) lá dentro. O JAR do JUnit é incluído para que o compilador encontre as dependências dos testes.
+
+## Como Executar
+
+Após a compilação, você pode iniciar a aplicação (classe Main) utilizando o seguinte comando:
+
+ ```bash
+java -cp bin Main
+```
 
 ## Como Executar os Testes
 
@@ -37,7 +44,6 @@ Usamos JUnit 5 para os testes. Para rodar, por exemplo, o ArcanistaTest, use est
 ```bash
 java -jar lib/junit-platform-console-standalone-1.10.2.jar --class-path bin --scan-classpath --include-classname ArcanistaTest
 ```
-
 
 Você pode substituir ArcanistaTest pelo nome de qualquer outra classe de teste que exista no projeto.
 
