@@ -11,9 +11,9 @@ Este é um projeto Java de Programação Orientada a Objetos (POO) onde criamos 
 
 ## Estrutura do Projeto
 
-- Arcanista.java, Cacador.java, Combatente.java, Guardiao.java: As classes dos nossos personagens.
-- ArcanistaTest.java: Os testes unitários para a classe Arcanista, feitos com JUnit.
-- Main.java: Onde a aplicação começa, se tiver uma lógica principal.
+- [Arcanista/Cacador/Combatente/Guardiao].java: As classes dos nossos personagens.
+- [Arcanista/Cacador/Guardiao]Test.java: Os testes unitários para cada classe, feitos com JUnit.
+- Main.java: Onde a aplicação começa, a lógica principal.
 - assets/: Aqui estão as imagens dos personagens. (As imagens foram geradas utilizando o ChatGPT.)
 - lib/: Nossas bibliotecas externas, como o junit-platform-console-standalone para rodar os testes.
 
