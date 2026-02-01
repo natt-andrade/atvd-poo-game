@@ -21,9 +21,10 @@ Este é um projeto Java de Programação Orientada a Objetos (POO) onde criamos 
 
 Para compilar os arquivos .java, vá até a pasta raiz do projeto e execute este comando:
 
-bash
+```bash
 mkdir -p bin
 javac -d bin -cp lib/junit-platform-console-standalone-1.10.2.jar *.java
+```
 
 
 Ele vai criar uma pasta bin e colocar todas as classes compiladas (.class) lá dentro. O JAR do JUnit é incluído para que o compilador encontre as dependências dos testes.
@@ -32,8 +33,10 @@ Ele vai criar uma pasta bin e colocar todas as classes compiladas (.class) lá d
 
 Usamos JUnit 5 para os testes. Para rodar, por exemplo, o ArcanistaTest, use este comando depois de compilar:
 
-bash
+
+```bash
 java -jar lib/junit-platform-console-standalone-1.10.2.jar --class-path bin --scan-classpath --include-classname ArcanistaTest
+```
 
 
 Você pode substituir ArcanistaTest pelo nome de qualquer outra classe de teste que exista no projeto.
